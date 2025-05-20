@@ -132,7 +132,7 @@ async def handle_assist_type(update: Update, context: ContextTypes.DEFAULT_TYPE)
     username = user.username or f"id:{user.id}"
     full_name = user.full_name
     sujet = update.message.text
-    msg = f"📨 Assistance de @{username} ({full_name})
+    msg = f"📨 Assistance de @{username} ({full_name})"
 Sujet : {sujet}"
     await context.bot.send_message(chat_id=ADMIN_ID, text=msg)
     await update.message.reply_text("Merci, votre demande a été transmise.")
