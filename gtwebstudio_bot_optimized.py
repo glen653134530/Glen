@@ -108,8 +108,8 @@ async def save_rdv(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("Rendez-vous enregistré. Merci !")
     lines = ["{} : {}".format(k, v) for k, v in row.items()]
     await context.bot.send_message(chat_id=ADMIN_ID, text="📆 Nouveau RDV:
-" + "
-".join(lines))
+
+.join(lines))
     return CHOOSING
 
 async def handle_assist_type(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -143,3 +143,19 @@ def main():
 
 if __name__ == "__main__":
     main()
+import threading
+
+if __name__ == "__main__":
+    # Lancer le bot dans un thread séparé
+    bot_thread = threading.Thread(target=main)
+    bot_thread.start()
+
+    # Lancer un faux serveur web pour Render
+    from flask import Flask
+    app = Flask(__name__)
+
+    @app.route("/")
+    def home():
+        return "Bot GT Web Studio est en ligne !"
+
+    app.run(host='0.0.0.0', port=10000)
