@@ -13,27 +13,21 @@ from telegram.ext import (
     ConversationHandler,
 )
 
-# Configure logging
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
 )
 
-# Variables d'environnement
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 ADMIN_ID = int(os.getenv("TELEGRAM_ADMIN_ID", "8142847766"))
 
-# États de la conversation
-CHOOSING, GET_NAME, GET_EMAIL, GET_PROJECT, CHOOSE_DATE, CHOOSE_TIME, SAVE_RDV = range(7)
+CHOOSING, GET_NAME, GET_EMAIL, GET_PROJECT, CHOOSE_DATE, CHOOSE_TIME = range(6)
 
-# Chemin du fichier de sauvegarde
 DATA_FILE = "rdv_data.csv"
 
-# Initialisation fichier si non existant
 if not os.path.exists(DATA_FILE):
     df_init = pd.DataFrame(columns=["Nom", "Email", "Projet", "Date", "Heure", "Timestamp", "UserID"])
     df_init.to_csv(DATA_FILE, index=False)
 
-# Fonction start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
         [KeyboardButton("📋 Nos Services"), KeyboardButton("📦 Demander un devis")],
@@ -52,13 +46,9 @@ async def handle_choice(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data.clear()
 
     if text == "📋 Nos Services":
-       await update.message.reply_text(
-    "Nous proposons :
-- Création de sites web
-- Design graphique
-- Gestion réseaux sociaux
-- Développement mobile"
-)
+        await update.message.reply_text(
+            "Nous proposons :\n- Création de sites web\n- Design graphique\n- Gestion réseaux sociaux\n- Développement mobile"
+        )
         return CHOOSING
     elif text == "📦 Demander un devis" or text == "📅 Prendre rendez-vous":
         await update.message.reply_text("Quel est votre nom ?")
@@ -129,26 +119,10 @@ async def save_rdv(update: Update, context: ContextTypes.DEFAULT_TYPE):
     df = pd.concat([df, pd.DataFrame([rdv_entry])], ignore_index=True)
     df.to_csv(DATA_FILE, index=False)
 
-    rdv_text = (
-        f"Nouveau RDV pris :
-"
-        f"Nom : {rdv_entry['Nom']}
-"
-        f"Email : {rdv_entry['Email']}
-"
-        f"Projet : {rdv_entry['Projet']}
-"
-        f"Date : {rdv_entry['Date']}
-"
-        f"Heure : {rdv_entry['Heure']}
-"
-    )
-
-    await context.bot.send_message(chat_id=ADMIN_ID, text=rdv_text)
+    await context.bot.send_message(chat_id=ADMIN_ID, text=str(rdv_entry))
     await update.message.reply_text("Votre rendez-vous a bien été enregistré. Merci !")
     return CHOOSING
 
-# Lancer le bot
 def main():
     app = ApplicationBuilder().token(TOKEN).build()
 
