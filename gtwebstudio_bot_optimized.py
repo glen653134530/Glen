@@ -33,10 +33,20 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def handle_choice(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
     if text == "📋 Nos Services":
-        await update.message.reply_text("➡️ Services : Sites Web, Design, Réseaux sociaux, Applications...")
+        await update.message.reply_text(
+            "Voici nos services :\n"
+            "📱 Applications mobiles\n"
+            "🌐 Création de sites web\n"
+            "✒️ Design graphique\n"
+            "📣 Gestion des réseaux sociaux\n"
+            "☁️ Hébergement & nom de domaine\n"
+            "✍️ Rédaction de contenu & storytelling\n"
+"
+        )
         return CHOOSING
     elif text == "📦 Demander un devis":
-        await update.message.reply_text("Merci ! Veuillez écrire à contact@gtwebstudio.com")
+        await update.message.reply_text("Merci ! Veuillez préciser votre projet :")
+        return GET_PROJECT
         return CHOOSING
     elif text == "📅 Prendre rendez-vous":
         await update.message.reply_text("Quel est votre nom ?")
@@ -113,6 +123,11 @@ async def save_rdv(update: Update, context: ContextTypes.DEFAULT_TYPE):
     return CHOOSING
 
 async def handle_assist_type(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user = update.effective_user
+    await context.bot.send_message(
+        chat_id=ADMIN_ID,
+        text=f"📩 Assistance demandée par {user.full_name} (@{user.username or user.id})\nSujet : {update.message.text}"
+    )
     user = update.effective_user
     username = user.username or "id:{}".format(user.id)
     full_name = user.full_name
