@@ -1,3 +1,4 @@
+
 import os
 import logging
 import datetime
@@ -33,17 +34,21 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def handle_choice(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
     if text == "📋 Nos Services":
-        services_message = (
-            "📋 *Nos Services disponibles* :\n\n"
-            "🌐 Création de sites web\n"
-            "📱 Développement d'applications mobiles\n"
-            "✒️ Design graphique\n"
-            "📣 Gestion des réseaux sociaux\n"
-            "☁️ Hébergement & nom de domaine\n"
-            "✍️ Rédaction de contenu & storytelling\n"
-            "⚙️ Automatisations et bots Telegram\n"
+        await update.message.reply_text(
+            "Voici nos services :
+"
+            "📱 Applications mobiles
+"
+            "🌐 Création de sites web
+"
+            "✒️ Design graphique
+"
+            "📣 Gestion des réseaux sociaux
+"
+            "☁️ Hébergement & nom de domaine
+"
+            "✍️ Rédaction de contenu & storytelling"
         )
-        await update.message.reply_text(services_message, parse_mode='Markdown')
         return CHOOSING
     elif text == "📦 Demander un devis":
         await update.message.reply_text("Merci ! Veuillez préciser votre projet :")
@@ -52,13 +57,12 @@ async def handle_choice(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("Quel est votre nom ?")
         return GET_NAME
     elif text == "✉️ Contacter un humain":
-        reply_markup = ReplyKeyboardMarkup(
-            [[KeyboardButton('📦 Problème avec un devis')],
-             [KeyboardButton('⏳ Rendez-vous annulé ou manqué')],
-             [KeyboardButton('💻 J’ai besoin d’un service spécifique')],
-             [KeyboardButton('❓ Autre demande')]],
-            resize_keyboard=True, one_time_keyboard=True
-        )
+        reply_markup = ReplyKeyboardMarkup([
+            [KeyboardButton("📦 Problème avec un devis")],
+            [KeyboardButton("⏳ Rendez-vous annulé ou manqué")],
+            [KeyboardButton("💻 J’ai besoin d’un service spécifique")],
+            [KeyboardButton("❓ Autre demande")]
+        ], resize_keyboard=True, one_time_keyboard=True)
         await update.message.reply_text("Quel est le sujet de votre demande ?", reply_markup=reply_markup)
         return ASSIST_TYPE
     else:
@@ -122,19 +126,23 @@ async def save_rdv(update: Update, context: ContextTypes.DEFAULT_TYPE):
     df = pd.concat([df, pd.DataFrame([row])], ignore_index=True)
     df.to_csv(DATA_FILE, index=False)
     await update.message.reply_text("Rendez-vous enregistré. Merci !")
-    lines = [f"{k} : {v}" for k, v in row.items()]
-    text = "\n".join(lines)
-    await context.bot.send_message(chat_id=ADMIN_ID, text=f"📅 Nouveau RDV :\n{text}")
+    lines = ["{} : {}".format(k, v) for k, v in row.items()]
+    await context.bot.send_message(chat_id=ADMIN_ID, text="
+".join(lines))
     return CHOOSING
 
 async def handle_assist_type(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
-    msg = f"📩 Assistance demandée par {user.full_name} (@{user.username or user.id})\nSujet : {update.message.text}"
+    username = user.username or f"id:{user.id}"
+    full_name = user.full_name
+    sujet = update.message.text
+    msg = f"📨 Assistance de @{username} ({full_name})
+Sujet : {sujet}"
     await context.bot.send_message(chat_id=ADMIN_ID, text=msg)
     await update.message.reply_text("Merci, votre demande a été transmise.")
     return CHOOSING
 
-def main():
+async def main():
     app = ApplicationBuilder().token(TOKEN).build()
     conv = ConversationHandler(
         entry_points=[CommandHandler("start", start)],
@@ -150,19 +158,4 @@ def main():
         fallbacks=[]
     )
     app.add_handler(conv)
-    app.run_polling()
-
-if __name__ == "__main__":
-    import threading
-    from flask import Flask
-
-    bot_thread = threading.Thread(target=main)
-    bot_thread.start()
-
-    app = Flask(__name__)
-
-    @app.route("/")
-    def home():
-        return "Bot GT Web Studio est en ligne !"
-
-    app.run(host="0.0.0.0", port=10000)
+    await app.run_polling()
