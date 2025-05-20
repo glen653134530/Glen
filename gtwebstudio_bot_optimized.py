@@ -52,13 +52,13 @@ async def handle_choice(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data.clear()
 
     if text == "📋 Nos Services":
-        await update.message.reply_text(
-            "Nous proposons :
+       await update.message.reply_text(
+    "Nous proposons :
 - Création de sites web
 - Design graphique
 - Gestion réseaux sociaux
 - Développement mobile"
-        )
+)
         return CHOOSING
     elif text == "📦 Demander un devis" or text == "📅 Prendre rendez-vous":
         await update.message.reply_text("Quel est votre nom ?")
