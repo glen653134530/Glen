@@ -41,7 +41,7 @@ async def handle_choice(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "📣 Gestion des réseaux sociaux\n"
             "☁️ Hébergement & nom de domaine\n"
             "✍️ Rédaction de contenu & storytelling\n"
-"
+        await update.message.reply_text("Bienvenue sur GT Web Studio !")
         )
         return CHOOSING
     elif text == "📦 Demander un devis":
