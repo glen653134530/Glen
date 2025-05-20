@@ -34,7 +34,7 @@ async def handle_choice(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
     if text == "📋 Nos Services":
         await update.message.reply_text(
-            "Voici nos services :\n"
+        await update.message.reply_text("Voici nos services :\n")
             "📱 Applications mobiles\n"
             "🌐 Création de sites web\n"
             "✒️ Design graphique\n"
