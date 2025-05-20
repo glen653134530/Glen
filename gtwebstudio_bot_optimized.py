@@ -1,4 +1,110 @@
-datetime.datetime.strptime(time, "%H:%M")
+import os
+import logging
+import datetime
+import pandas as pd
+from telegram import Update, ReplyKeyboardMarkup, KeyboardButton
+from telegram.ext import (
+    ApplicationBuilder, CommandHandler, MessageHandler,
+    filters, ContextTypes, ConversationHandler
+)
+from flask import Flask
+import threading
+
+logging.basicConfig(level=logging.INFO)
+
+TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+ADMIN_ID = int(os.getenv("TELEGRAM_ADMIN_ID", "8142847766"))
+DATA_FILE = "rdv_data.csv"
+
+if not os.path.exists(DATA_FILE):
+    pd.DataFrame(columns=["Nom", "Email", "Projet", "Date", "Heure", "Timestamp", "UserID"]).to_csv(DATA_FILE, index=False)
+
+CHOOSING, GET_NAME, GET_EMAIL, GET_PROJECT, CHOOSE_DATE, CHOOSE_TIME, ASSIST_TYPE = range(7)
+
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    keyboard = [
+        [KeyboardButton("📋 Nos Services"), KeyboardButton("📦 Demander un devis")],
+        [KeyboardButton("📅 Prendre rendez-vous"), KeyboardButton("✉️ Contacter un humain")]
+    ]
+    await update.message.reply_text(
+        "Bienvenue sur GT Web Studio ! Que souhaitez-vous faire aujourd’hui ?",
+        reply_markup=ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
+    )
+    return CHOOSING
+
+async def handle_choice(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    text = update.message.text
+    if text == "📋 Nos Services":
+        await update.message.reply_text(
+            "Voici nos services :
+"
+            "📱 Applications mobiles
+"
+            "🌐 Création de sites web
+"
+            "✒️ Design graphique
+"
+            "📣 Gestion des réseaux sociaux
+"
+            "☁️ Hébergement & nom de domaine
+"
+            "✍️ Rédaction de contenu & storytelling
+"
+        )
+        return CHOOSING
+    elif text == "📦 Demander un devis":
+        await update.message.reply_text("Merci ! Veuillez préciser votre projet :")
+        return GET_PROJECT
+    elif text == "📅 Prendre rendez-vous":
+        await update.message.reply_text("Quel est votre nom ?")
+        return GET_NAME
+    elif text == "✉️ Contacter un humain":
+        reply_markup = ReplyKeyboardMarkup([
+            [KeyboardButton('📦 Problème avec un devis')],
+            [KeyboardButton('⏳ Rendez-vous annulé ou manqué')],
+            [KeyboardButton('💻 J’ai besoin d’un service spécifique')],
+            [KeyboardButton('❓ Autre demande')]
+        ], resize_keyboard=True, one_time_keyboard=True)
+        await update.message.reply_text("Quel est le sujet de votre demande ?", reply_markup=reply_markup)
+        return ASSIST_TYPE
+    else:
+        await update.message.reply_text("Commande non reconnue. Veuillez utiliser le menu.")
+        return CHOOSING
+
+async def get_name(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    context.user_data["nom"] = update.message.text
+    await update.message.reply_text("Quel est votre email ?")
+    return GET_EMAIL
+
+async def get_email(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    email = update.message.text
+    if "@" not in email or "." not in email:
+        await update.message.reply_text("Email invalide. Veuillez réessayer.")
+        return GET_EMAIL
+    context.user_data["email"] = email
+    await update.message.reply_text("Décrivez votre projet :")
+    return GET_PROJECT
+
+async def get_project(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    context.user_data["projet"] = update.message.text
+    await update.message.reply_text("Quelle date ? (JJ/MM/AAAA)")
+    return CHOOSE_DATE
+
+async def choose_date(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    date = update.message.text
+    try:
+        datetime.datetime.strptime(date, "%d/%m/%Y")
+        context.user_data["date"] = date
+        await update.message.reply_text("À quelle heure ? (HH:MM)")
+        return CHOOSE_TIME
+    except ValueError:
+        await update.message.reply_text("Format invalide. Reprenez au format JJ/MM/AAAA.")
+        return CHOOSE_DATE
+
+async def choose_time(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    time = update.message.text
+    try:
+        datetime.datetime.strptime(time, "%H:%M")
         context.user_data["heure"] = time
         return await save_rdv(update, context)
     except ValueError:
@@ -21,20 +127,16 @@ async def save_rdv(update: Update, context: ContextTypes.DEFAULT_TYPE):
     df = pd.read_csv(DATA_FILE)
     df = pd.concat([df, pd.DataFrame([row])], ignore_index=True)
     df.to_csv(DATA_FILE, index=False)
-
     await update.message.reply_text("Rendez-vous enregistré. Merci !")
     lignes = ["{} : {}".format(k, v) for k, v in row.items()]
     text = "\n".join(lignes)
-    await context.bot.send_message(chat_id=ADMIN_ID, text=f"📅 Nouveau RDV :\n{text}")
+    await context.bot.send_message(chat_id=ADMIN_ID, text="📅 Nouveau RDV enregistré :\n" + text)
     return CHOOSING
 
 async def handle_assist_type(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
-    username = user.username or f"id:{user.id}"
-    full_name = user.full_name
-    choice = update.message.text
+    msg = f"📩 Assistance demandée par {user.full_name} (@{user.username or user.id})\nSujet : {update.message.text}"
     await update.message.reply_text("Merci, votre demande a été transmise.")
-    msg = f"📨 Assistance de @{username} ({full_name})\nSujet : {choice}"
     await context.bot.send_message(chat_id=ADMIN_ID, text=msg)
     return CHOOSING
 
@@ -56,15 +158,13 @@ def main():
     app.add_handler(conv)
     app.run_polling()
 
-# Lancement Render (Flask + bot)
-if name == "__main__":
+if __name__ == "__main__":
     bot_thread = threading.Thread(target=main)
     bot_thread.start()
 
-    app = Flask(__name__)
-
-    @app.route("/")
+    web_app = Flask(__name__)
+    @web_app.route("/")
     def home():
         return "Bot GT Web Studio est en ligne !"
 
-    app.run(host='0.0.0.0', port=10000)
+    web_app.run(host='0.0.0.0', port=10000)
