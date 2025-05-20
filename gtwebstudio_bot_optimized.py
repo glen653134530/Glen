@@ -34,16 +34,16 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def handle_choice(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
     if text == "📋 Nos Services":
-    services = (
-        "1. Création de sites web",
-        "2. Applications mobiles",
-        "3. Design graphique",
-        "4. Gestion des réseaux sociaux",
-        "5. Rédaction de contenu",
-        "6. Hébergement & nom de domaine"
-    )
-    await update.message.reply_text("\n".join(services))
-    return CHOOSING
+        services = """📋 Nos Services :
+- 📱 Applications mobiles
+- 🌐 Création de sites web
+- ✒️ Design graphique
+- 📣 Gestion des réseaux sociaux
+- ☁️ Hébergement & nom de domaine
+- ✍️ Rédaction de contenu & storytelling
+"""
+        await update.message.reply_text(services)
+        return CHOOSING
     elif text == "📦 Demander un devis":
         await update.message.reply_text("Merci ! Veuillez préciser votre projet :")
         return GET_PROJECT
@@ -121,19 +121,18 @@ async def save_rdv(update: Update, context: ContextTypes.DEFAULT_TYPE):
     df.to_csv(DATA_FILE, index=False)
     await update.message.reply_text("Rendez-vous enregistré. Merci !")
     lines = ["{} : {}".format(k, v) for k, v in row.items()]
-await context.bot.send_message(
-    chat_id=ADMIN_ID,
-    text="\n".join(lines)
-)
-return CHOOSING
+    await context.bot.send_message(chat_id=ADMIN_ID, text="📅 Nouveau RDV :
+" + "
+".join(lines))
+    return CHOOSING
 
 async def handle_assist_type(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
     username = user.username or f"id:{user.id}"
     full_name = user.full_name
     sujet = update.message.text
-    msg = f"""📨 Assistance de @{username} ({full_name})
-Sujet : {sujet}"""
+    msg = f"📩 Assistance de @{username} ({full_name})
+Sujet : {sujet}"
     await context.bot.send_message(chat_id=ADMIN_ID, text=msg)
     await update.message.reply_text("Merci, votre demande a été transmise.")
     return CHOOSING
@@ -155,3 +154,7 @@ async def main():
     )
     app.add_handler(conv)
     await app.run_polling()
+
+if __name__ == "__main__":
+    import asyncio
+    asyncio.run(main())
