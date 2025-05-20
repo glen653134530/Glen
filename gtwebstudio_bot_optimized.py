@@ -107,7 +107,7 @@ async def save_rdv(update: Update, context: ContextTypes.DEFAULT_TYPE):
     df.to_csv(DATA_FILE, index=False)
     await update.message.reply_text("Rendez-vous enregistré. Merci !")
     lines = ["{} : {}".format(k, v) for k, v in row.items()]
-        await context.bot.send_message(chat_id=ADMIN_ID, text="📅 Nouveau RDV enregistré.")
+    await context.bot.send_message(chat_id=ADMIN_ID, text="📅 Nouveau RDV enregistré.")
 " + "
 ".join(lines))
     return CHOOSING
@@ -120,7 +120,7 @@ async def handle_assist_type(update: Update, context: ContextTypes.DEFAULT_TYPE)
     await update.message.reply_text("Merci, votre demande a été transmise.")
     msg = "📨 Assistance de @{} ({})
 Sujet : {}".format(username, full_name, choice)
-    await context.bot.send_message(chat_id=ADMIN_ID, text=msg)
+    await context.bot.send_message(chat_id=ADMIN_ID, text="📅 Nouveau RDV enregistré.")
     return CHOOSING
 
 def main():
