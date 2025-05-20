@@ -36,21 +36,14 @@ async def handle_choice(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
     if text == "📋 Nos Services":
         await update.message.reply_text(
-            "Voici nos services :
-"
-            "📱 Applications mobiles
-"
-            "🌐 Création de sites web
-"
-            "✒️ Design graphique
-"
-            "📣 Gestion des réseaux sociaux
-"
-            "☁️ Hébergement & nom de domaine
-"
-            "✍️ Rédaction de contenu & storytelling
-"
-        )
+    "Voici nos services :\n"
+    "📱 Applications mobiles\n"
+    "🌐 Création de sites web\n"
+    "✒️ Design graphique\n"
+    "📣 Gestion des réseaux sociaux\n"
+    "☁️ Hébergement & nom de domaine\n"
+    "✍️ Rédaction de contenu & storytelling"
+)
         return CHOOSING
     elif text == "📦 Demander un devis":
         await update.message.reply_text("Merci ! Veuillez préciser votre projet :")
