@@ -119,7 +119,7 @@ async def save_rdv(update: Update, context: ContextTypes.DEFAULT_TYPE):
     lines = ["{} : {}".format(k, v) for k, v in row.items()]
     await context.bot.send_message(chat_id=ADMIN_ID, text="📅 Nouveau RDV enregistré.")
 " + "
-".join(lines))
+        text = "\n".join(lignes)
     return CHOOSING
 
 async def handle_assist_type(update: Update, context: ContextTypes.DEFAULT_TYPE):
