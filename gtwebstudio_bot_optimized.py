@@ -1,8 +1,8 @@
-
 import os
 import logging
 import datetime
 import pandas as pd
+from flask import Flask
 from telegram import Update, ReplyKeyboardMarkup, KeyboardButton
 from telegram.ext import (
     ApplicationBuilder, CommandHandler, MessageHandler,
@@ -34,15 +34,23 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def handle_choice(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
     if text == "📋 Nos Services":
-        services = """📋 Nos Services :
-- 📱 Applications mobiles
-- 🌐 Création de sites web
-- ✒️ Design graphique
-- 📣 Gestion des réseaux sociaux
-- ☁️ Hébergement & nom de domaine
-- ✍️ Rédaction de contenu & storytelling
-"""
-        await update.message.reply_text(services)
+        services = (
+            "📋 *Nos Services* :
+
+"
+            "1. 🌐 Création de sites web
+"
+            "2. ✒️ Design graphique
+"
+            "3. 📣 Gestion des réseaux sociaux
+"
+            "4. 📱 Applications mobiles
+"
+            "5. ☁️ Hébergement & nom de domaine
+"
+            "6. ✍️ Rédaction de contenu & storytelling"
+        )
+        await update.message.reply_text(services, parse_mode="Markdown")
         return CHOOSING
     elif text == "📦 Demander un devis":
         await update.message.reply_text("Merci ! Veuillez préciser votre projet :")
@@ -137,7 +145,7 @@ Sujet : {sujet}"
     await update.message.reply_text("Merci, votre demande a été transmise.")
     return CHOOSING
 
-async def main():
+async def run_bot():
     app = ApplicationBuilder().token(TOKEN).build()
     conv = ConversationHandler(
         entry_points=[CommandHandler("start", start)],
@@ -155,6 +163,17 @@ async def main():
     app.add_handler(conv)
     await app.run_polling()
 
+# Flask app pour Render Web Service
+flask_app = Flask(__name__)
+
+@flask_app.route("/")
+def home():
+    return "Bot GT Web Studio en ligne (Render Web Service)"
+
+# Lancer à la fois le bot et le serveur Flask
 if __name__ == "__main__":
     import asyncio
-    asyncio.run(main())
+    import threading
+
+    threading.Thread(target=lambda: flask_app.run(host="0.0.0.0", port=10000)).start()
+    asyncio.run(run_bot())
