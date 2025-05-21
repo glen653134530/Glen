@@ -3,4 +3,4 @@ services:
     name: gtweb-bot
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn gtwebstudio_bot_webhook_with_admin_db:app
+    startCommand: gunicorn gtwebstudio_bot_fonctionnel:app
