@@ -3,4 +3,4 @@ services:
     name: gtweb-bot
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn gtwebstudio_bot_fonctionnel:app
+    startCommand: gunicorn gtwebstudio_bot_optimized:app
