@@ -2,24 +2,28 @@
 from flask import Flask, request
 import telegram
 from telegram import Update, ReplyKeyboardMarkup
-from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, MessageHandler, filters
+from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
 import os
 import sqlite3
 from datetime import datetime
 
-# Configuration
 TOKEN = os.getenv("BOT_TOKEN")
 ADMIN_ID = 8142847766
 bot = telegram.Bot(token=TOKEN)
 app = Flask(__name__)
 
-# Base de données SQLite pour les rendez-vous
-DB_NAME = "rendezvous.db"
+# Clavier de réponse
+keyboard = ReplyKeyboardMarkup([
+    ["📋 Nos Services", "📦 Demander un devis"],
+    ["📅 Prendre rendez-vous", "✉️ Contacter un humain"]
+], resize_keyboard=True)
 
+# Base SQLite
+DB_NAME = "rendezvous.db"
 def init_db():
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
-    cursor.execute('''
+    cursor.execute("""
         CREATE TABLE IF NOT EXISTS rendezvous (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             user_id INTEGER,
@@ -28,16 +32,13 @@ def init_db():
             datetime TEXT,
             created_at TEXT
         )
-    ''')
+    """)
     conn.commit()
     conn.close()
-
 init_db()
 
-keyboard = ReplyKeyboardMarkup([
-    ["📋 Nos Services", "📦 Demander un devis"],
-    ["📅 Prendre rendez-vous", "✉️ Contacter un humain"]
-], resize_keyboard=True)
+# États utilisateur
+user_states = {}
 
 # Commande /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -46,12 +47,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reply_markup=keyboard
     )
 
-# Message handler
-user_states = {}
-
+# Réponses aux messages
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.message.chat.id
     text = update.message.text
+    username = update.message.chat.username or "Utilisateur inconnu"
 
     if text == "📋 Nos Services":
         await update.message.reply_text(
@@ -64,15 +64,15 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     elif text == "📦 Demander un devis":
         await update.message.reply_text("Veuillez décrire votre projet en quelques lignes.")
-        await context.bot.send_message(chat_id=ADMIN_ID, text=f"Un utilisateur (@{update.message.chat.username}) a demandé un devis.")
+        await bot.send_message(chat_id=ADMIN_ID, text=f"📦 Demande de devis de @{username}")
         user_states[user_id] = "devis"
 
     elif text == "✉️ Contacter un humain":
         await update.message.reply_text("Un membre de notre équipe vous contactera sous peu.")
-        await context.bot.send_message(chat_id=ADMIN_ID, text=f"Un utilisateur (@{update.message.chat.username}) a demandé à parler à un humain.")
+        await bot.send_message(chat_id=ADMIN_ID, text=f"✉️ Demande de contact humain par @{username}")
 
     elif text == "📅 Prendre rendez-vous":
-        await update.message.reply_text("Merci ! Quel est votre nom ?")
+        await update.message.reply_text("Quel est votre nom complet ?")
         user_states[user_id] = "rendezvous_nom"
 
     elif user_id in user_states:
@@ -85,17 +85,17 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         elif state == "rendezvous_projet":
             context.user_data["projet"] = text
-            await update.message.reply_text("Quelle date et heure souhaitez-vous ? (ex: 25 mai à 14h)")
+            await update.message.reply_text("À quelle date et heure souhaitez-vous le rendez-vous ?")
             user_states[user_id] = "rendezvous_datetime"
 
         elif state == "rendezvous_datetime":
             context.user_data["datetime"] = text
             conn = sqlite3.connect(DB_NAME)
             cursor = conn.cursor()
-            cursor.execute('''
+            cursor.execute("""
                 INSERT INTO rendezvous (user_id, nom, projet, datetime, created_at)
                 VALUES (?, ?, ?, ?, ?)
-            ''', (
+            """, (
                 user_id,
                 context.user_data.get("nom"),
                 context.user_data.get("projet"),
@@ -105,24 +105,24 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             conn.commit()
             conn.close()
 
-            await update.message.reply_text("Votre rendez-vous a bien été enregistré. Merci !")
-            await context.bot.send_message(
-                chat_id=ADMIN_ID,
-                text=f"Nouvelle demande de rendez-vous :\nNom : {context.user_data.get('nom')}\nProjet : {context.user_data.get('projet')}\nDate/Heure : {context.user_data.get('datetime')}"
+            await update.message.reply_text("Merci ! Votre rendez-vous a été enregistré.")
+            await bot.send_message(chat_id=ADMIN_ID, text=
+                f"📅 Nouveau rendez-vous\nNom: {context.user_data.get('nom')}\n"
+                f"Projet: {context.user_data.get('projet')}\n"
+                f"Date/Heure: {context.user_data.get('datetime')}"
             )
             user_states.pop(user_id)
 
     else:
-        await update.message.reply_text("Merci pour votre message. Utilisez les options du menu ci-dessous :", reply_markup=keyboard)
+        await update.message.reply_text("Veuillez choisir une option ci-dessous :", reply_markup=keyboard)
 
-# App Telegram (Webhook)
+# Configuration Telegram
 application = ApplicationBuilder().token(TOKEN).build()
 application.add_handler(CommandHandler("start", start))
 application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
-    if request.method == "POST":
-        update = telegram.Update.de_json(request.get_json(force=True), bot)
-        application.update_queue.put_nowait(update)
+    update = telegram.Update.de_json(request.get_json(force=True), bot)
+    application.update_queue.put_nowait(update)
     return "OK"
