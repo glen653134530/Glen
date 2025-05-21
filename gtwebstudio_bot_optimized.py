@@ -1,4 +1,4 @@
-glen, [21/05/2025 15:57]
+glen, [21/5/2025 15:57]
 from flask import Flask, request
 import telegram
 from telegram import Update, ReplyKeyboardMarkup
@@ -114,7 +114,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 f"Projet: {context.user_data.get('projet')}\n"
                 f"Date/Heure: {context.user_data.
 
-glen, [21/05/2025 15:57]
+glen, [21/5/2025 15:57]
 get('datetime')}"
             )
             user_states.pop(user_id)
