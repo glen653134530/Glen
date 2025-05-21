@@ -1,7 +1,6 @@
 services:
-  - type: worker
-    name: gtwebstudio-bot
+  - type: web
+    name: gtweb-bot
     env: python
-    plan: free
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "python3 gtwebstudio_bot_optimized.py"
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn gtwebstudio_bot_webhook_with_admin_db:app
