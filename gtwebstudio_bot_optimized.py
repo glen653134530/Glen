@@ -1,3 +1,4 @@
+glen, [21/05/2025 15:57]
 from flask import Flask, request
 import telegram
 from telegram import Update, ReplyKeyboardMarkup
@@ -6,19 +7,21 @@ import os
 import sqlite3
 from datetime import datetime
 
+# Initialisation
 TOKEN = os.getenv("BOT_TOKEN")
 ADMIN_ID = 8142847766
 bot = telegram.Bot(token=TOKEN)
-app = Flask(name)
+app = Flask(__name__)  # Correction ici
 
-# Clavier de réponse
+# Clavier personnalisé
 keyboard = ReplyKeyboardMarkup([
     ["📋 Nos Services", "📦 Demander un devis"],
     ["📅 Prendre rendez-vous", "✉️ Contacter un humain"]
 ], resize_keyboard=True)
 
-# Base SQLite
+# Base de données
 DB_NAME = "rendezvous.db"
+
 def init_db():
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
@@ -34,9 +37,10 @@ def init_db():
     """)
     conn.commit()
     conn.close()
+
 init_db()
 
-# États utilisateur
+# Suivi des étapes utilisateur
 user_states = {}
 
 # Commande /start
@@ -46,7 +50,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reply_markup=keyboard
     )
 
-# Réponses aux messages
+# Gestion des messages utilisateurs
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.message.chat.id
     text = update.message.text
@@ -108,19 +112,29 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await bot.send_message(chat_id=ADMIN_ID, text=
                 f"📅 Nouveau rendez-vous\nNom: {context.user_data.get('nom')}\n"
                 f"Projet: {context.user_data.get('projet')}\n"
-                f"Date/Heure: {context.user_data.get('datetime')}"
+                f"Date/Heure: {context.user_data.
+
+glen, [21/05/2025 15:57]
+get('datetime')}"
             )
             user_states.pop(user_id)
-            else:
+
+    else:
         await update.message.reply_text("Veuillez choisir une option ci-dessous :", reply_markup=keyboard)
 
-# Configuration Telegram
+# Configuration de l’application Telegram
 application = ApplicationBuilder().token(TOKEN).build()
 application.add_handler(CommandHandler("start", start))
 application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
+# Route webhook pour Telegram
 @app.route('/webhook', methods=['POST'])
 def webhook():
     update = telegram.Update.de_json(request.get_json(force=True), bot)
     application.update_queue.put_nowait(update)
     return "OK"
+
+# Route racine pour éviter erreur 404
+@app.route('/')
+def home():
+    return "GT Web Studio bot is running."
