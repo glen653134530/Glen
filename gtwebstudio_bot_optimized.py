@@ -1,4 +1,3 @@
-
 from flask import Flask, request
 import telegram
 from telegram import Update, ReplyKeyboardMarkup
@@ -10,7 +9,7 @@ from datetime import datetime
 TOKEN = os.getenv("BOT_TOKEN")
 ADMIN_ID = 8142847766
 bot = telegram.Bot(token=TOKEN)
-app = Flask(__name__)
+app = Flask(name)
 
 # Clavier de réponse
 keyboard = ReplyKeyboardMarkup([
@@ -112,8 +111,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 f"Date/Heure: {context.user_data.get('datetime')}"
             )
             user_states.pop(user_id)
-
-    else:
+            else:
         await update.message.reply_text("Veuillez choisir une option ci-dessous :", reply_markup=keyboard)
 
 # Configuration Telegram
