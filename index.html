@@ -1,0 +1,899 @@
+```html
+<!-- L1: Déclare le type de document comme HTML5 -->
+<!DOCTYPE html>
+<!-- NOTE: Les prix ont été convertis en F CFA à titre de démonstration (taux fixe utilisé ici : 1 USD = 600 F CFA). Adaptez selon votre barème réel. -->
+
+<!-- L2: Ouvre le document HTML et définit la langue principale sur le français -->
+<html lang="fr">
+<!-- L3: Début de l'en-tête du document -->
+<head>
+    <!-- L4: Définit l'encodage des caractères à UTF-8 pour supporter les caractères spéciaux -->
+    <meta charset="UTF-8">
+    <!-- L5: Optimisation d'affichage pour Internet Explorer (mode Edge) -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- L6: Configure l'affichage responsive pour appareils mobiles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- L7: Titre de l'onglet du navigateur -->
+    <title>Poulet Décembre</title>
+
+    <!-- L8: Lien CDN vers la bibliothèque d'icônes Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- L9: Lien vers le fichier CSS personnalisé du projet -->
+    <link rel="stylesheet" href="css/style.css">
+
+<!-- L10: Fin de l'en-tête -->
+</head>
+<!-- L11: Début du corps du document -->
+<body>
+    
+<!-- L12: Commentaire de section - début de l'en-tête visuel du site -->
+<!-- header section starts  -->
+
+<!-- L13: En-tête fixe avec logo, navigation et icônes d'action -->
+<header class="header">
+
+    <!-- L14: Logo cliquable du site avec une icône couverts -->
+    <a href="#" class="logo"> <i class="fas fa-drumstick-bite"></i> Poulet Décembre </a>
+    
+    <!-- L15: Barre de navigation principale avec ancres vers les sections -->
+    <nav class="navbar">
+        <!-- L16: Lien vers la section Accueil -->
+        <a href="#home">Accueil</a>
+        <!-- L17: Lien vers la section À propos -->
+        <a href="#about">À propos</a>
+        <!-- L18: Lien vers la section Populaire -->
+        <a href="#popular">Produits</a>
+        <!-- L20: Lien vers la section Commande -->
+        <a href="#order">Commande</a>
+        <!-- L21: Lien vers la section Blogs -->
+        <a href="#blogs">Blogs</a>
+        <a href="gallerie.html">cathalogue & entrepot </a>
+
+    </nav>
+
+    <!-- L22: Groupe d'icônes d'actions (menu, recherche, panier, connexion) -->
+    <div class="icons">
+        <!-- L23: Bouton d'ouverture du menu (vue mobile) -->
+        <div id="menu-btn" class="fas fa-bars"></div>
+        <!-- L24: Bouton d'ouverture du formulaire de recherche -->
+        <div id="search-btn" class="fas fa-search"></div>
+        <!-- L25: Bouton d'ouverture du panier -->
+        <div id="cart-btn" class="fas fa-shopping-cart"></div>
+        <!-- L26: Bouton d'ouverture du formulaire de connexion -->
+        <div id="login-btn" class="fas fa-user"></div>
+    </div>
+    
+</header>
+
+<!-- L27: Commentaire de section - fin de l'en-tête -->
+<!-- header section ends  -->
+
+<!-- L28: Commentaire de section - formulaire de recherche -->
+<!-- search-form  -->
+
+<!-- L29: Conteneur du formulaire de recherche masqué/affiché via JS -->
+<section class="search-form-container">
+
+    <!-- L30: Formulaire sans action (géré côté client) -->
+    <form action="">
+        <!-- L31: Champ de recherche avec placeholder traduit -->
+        <input type="search" name="" placeholder="Rechercher ici..." id="search-box">
+        <!-- L32: Icône loupe associée au champ via 'for' -->
+        <label for="search-box" class="fas fa-search"></label>
+    </form>
+
+</section>
+
+<!-- L33: Commentaire de section - panier d'achat -->
+<!-- shopping-cart section  -->
+
+<!-- L34: Conteneur principal du panier d'achat -->
+
+<!-- L58: Commentaire de section - formulaire de connexion -->
+<!-- login-form  -->
+
+<!-- L59: Conteneur du formulaire de connexion (affiché/masqué en JS) -->
+<div class="login-form-container">
+
+    <!-- L60: Formulaire de connexion utilisateur -->
+    <form action="">
+        <!-- L61: Titre du formulaire -->
+        <h3>Formulaire de connexion</h3>
+        <!-- L62: Champ email avec placeholder en français -->
+        <input type="email" name="" placeholder="Entrez votre email" id="" class="box">
+        <!-- L63: Champ mot de passe avec placeholder en français -->
+        <input type="password" name="" placeholder="Entrez votre mot de passe" id="" class="box">
+        <!-- L64: Case à cocher 'se souvenir de moi' -->
+        <div class="remember">
+            <input type="checkbox" name="" id="remember-me">
+            <label for="remember-me">Se souvenir de moi</label>
+        </div>
+        <!-- L65: Bouton de soumission du formulaire -->
+        <input type="submit" value="Se connecter" class="btn">
+        <!-- L66: Liens d'aide (mot de passe oublié et création de compte) -->
+        <p>Mot de passe oublié ? <a href="#">Cliquez ici</a></p>
+        <p>Vous n'avez pas de compte ? <a href="#">Créez-en un</a></p>
+    </form>
+
+</div>
+
+<!-- L67: Commentaire de section - début section Accueil -->
+<!-- home section starts  -->
+
+<!-- L68: Section d'accueil avec message et images -->
+<section class="home" id="home">
+
+    <!-- L69: Colonne texte de la section accueil -->
+    <div class="content">
+        <!-- L70: Petit texte d'intro -->
+        <span>Bienvenue chez Poulet Décembre </span>
+        <!-- L71: Titre marketing principal -->
+        <h3>Poulets premium élevés avec passion 😋</h3>
+        <!-- L72: Paragraphe descriptif (placeholder lorem ipsum) -->
+        <p>Poulets de chair de qualité supérieure, élevés localement sans antibiotiques ni hormones — fraîcheur et saveur garanties par Poulet Décembre.</p>
+<h2>Découvrez l’excellence de notre élevage artisanal </h2>
+
+        <!-- L73: Bouton d'appel à l'action pour commander -->
+        <a class="btn" href="products.html">Découvrir nos produits</a>
+    </div>
+
+    <!-- L74: Colonne images (image principale + effet parallaxe) -->
+    <div class="image">
+        <!-- L75: Image principale de la page d'accueil -->
+        <img src="image/home-img.png" alt="" class="home-img">
+        <!-- L76: Image décorative pour effet parallaxe -->
+        <!--<img src="image/home-parallax-img.png" alt="" class="home-parallax-img">-->
+    </div>
+
+</section>
+
+<section class="menu" id="menu">
+
+    <!-- L130: En-tête de section -->
+    <div class="heading">
+        <span><h2>Nos catégories</h2></span>
+    </div>
+
+    <!-- L131: Grille des cartes menu -->
+    
+    <div class="box-container">
+
+        <!-- L132: Carte menu (1) -->
+        <a href="#" class="box">
+            <img src="image/menu-1.png" alt="">
+            <div class="content">
+                <h3><h3>Poulet entier (3 a 4 kg)</h3>
+            <p>Poulet de chair entier, élevé en plein air pour une viande tendre et savoureuse.</p></h3>
+                <div class="price"> 4500 F CFA</div>
+            </div>
+        </a>
+
+        <!-- L133: Carte menu (2) -->
+        <a href="#" class="box">
+            <img src="image/menu-2.png" alt="">
+            <div class="content">
+                <h3>Cuisses de poulet (500g)</h3>
+            <p>Cuisses juteuses et fondantes, idéales pour grillades et rôtis.</p>
+                <div class="price"> 2500 F CFA</div>
+            </div>
+        </a>
+
+        <!-- L134: Carte menu (3) -->
+        <a href="#" class="box">
+            <img src="image/menu-3.png" alt="">
+            <div class="content">
+                <h3>Ailes de poulet (500g)</h3>
+            <p>Ailes croustillantes et parfumées, parfaites pour apéritifs et fritures.</p>
+                <div class="price"> 2500 F CFA</div>
+            </div>
+        </a>
+
+        <!-- L135: Carte menu (4) -->
+        <a href="#" class="box">
+            <img src="image/menu-4.png" alt="">
+            <div class="content">
+                 <h3>Poulet découpé (2 a 3 kg)</h3>
+            <p>Morceaux prêts à cuisiner, sélectionnés pour une qualité irréprochable.</p>
+                <div class="price"> 4000 F CFA</div>
+            </div>
+        </a>
+
+        <!-- L136: Carte menu (5) -->
+        <a href="#" class="box">
+            <img src="image/menu-5.png" alt="">
+            <div class="content">
+                 <h3>Brochettes de poulet</h3>
+            <p>Brochettes fraîches marinées, pour des repas conviviaux et gourmands.</p>
+                <div class="price"> 400 F CFA</div>
+            </div>
+        </a>
+
+        <!-- L137: Carte menu (6) -->
+        <a href="#" class="box">
+            <img src="image/menu-6.png" alt="">
+            <div class="content">
+                 <h3>Poulet fumé</h3>
+            <p>Poulet fumé artisanal, prêt à déguster avec une saveur unique.</p>
+                <div class="price">4 000 F CFA</div>
+            </div>
+        </a>
+
+    </div>
+
+</section>
+
+<!-- L77: Commentaire de section - fin section Accueil -->
+<!-- home section ends  -->
+
+<!-- L78: Commentaire de section - catégories de produits -->
+<!-- category section starts  -->
+
+<!-- L79: Section listant les catégories cliquables -->
+
+
+<!-- L86: Commentaire de section - fin catégories -->
+<!-- category section ends -->
+
+<!-- L87: Commentaire de section - À propos -->
+<!-- about section starts  -->
+
+<!-- L88: Section À propos avec image et arguments marketing -->
+<section class="about" id="about">
+
+    <!-- L89: Colonne image illustrative -->
+    <div class="image">
+        <img src="image/about-img.png" alt="">
+    </div>
+
+    <!-- L90: Colonne texte avec titres et icônes services -->
+    <div class="content">
+        <!-- L91: Surtitre -->
+        <span>Pourquoi nous choisir ?</span>
+        <!-- L92: Titre principal -->
+        <h3 class="title"> La qualité qui fait toute la différence!</h3>
+        <!-- L93: Paragraphe descriptif (lorem ipsum) -->
+        <p>Chez Poulet Décembre, chaque poulet est élevé avec soin dans nos fermes locales. Nous privilégions des méthodes traditionnelles respectueuses du bien-être animal pour vous offrir une viande tendre, saine et pleine de saveur. Découvrez l’authenticité d’un élevage passionné qui transforme chaque repas en moment d’excellence.</p>
+        <!-- L94: Bouton d'information -->
+         <a class="btn" href="about.html">En savoir plus</a>
+        <!-- L95: Conteneur des icônes de services -->
+        <div class="icons-container">
+            <!-- L96: Service 1 - livraison rapide -->
+            <div class="icons">
+                <img src="image/serv-1.png" alt="">
+                <h3>Livraison rapide</h3>
+            </div>  
+            <!-- L97: Service 2 - nourriture fraîche -->
+            <div class="icons">
+                <img src="image/serv-2.png" alt="">
+                <h3>Poulets frais du jour</h3>
+            </div>   
+            <!-- L98: Service 3 - meilleure qualité -->
+            <div class="icons">
+                <img src="image/serv-3.png" alt="">
+                <h3>Qualité premium</h3>
+            </div>  
+            <!-- L99: Service 4 - support 24/7 -->
+            <div class="icons">
+                <img src="image/serv-4.png" alt="">
+                <h3>Support 24/7</h3>
+            </div>           
+        </div>
+    </div>
+
+</section>
+
+<!-- L100: Commentaire de section - fin À propos -->
+<!-- about section ends -->
+
+<!-- L101: Commentaire de section - Populaire -->
+<!-- popular section starts  -->
+
+<!-- L102: Section listant les plats populaires -->
+<section class="popular" id="popular">
+
+    <!-- L103: En-tête de section avec titre et sous-titre -->
+    <div class="heading">
+        <span>Découvrez nos Spécialités</span>
+
+    </div>
+
+    <!-- L104: Grille de cartes des plats -->
+    <div class="box-container">
+
+        <!-- L105: Carte plat (1) -->
+        <div class="box">
+            <!-- L106: Bouton "favori" -->
+            <a href="#" class="fas fa-heart"></a>
+            <!-- L107: Conteneur image du plat -->
+            <div class="image">
+                <img src="image/food-1.png" alt="">
+            </div>
+            <!-- L108: Contenu textuel du plat -->
+            <div class="content">
+                <h3>Poulet entier frais</h3>
+                <!-- L109: Notation en étoiles -->
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span> (50) </span>
+                </div>
+                <!-- L110: Prix avec prix barré (promo) -->
+                <div class="price">6 500 F CFA <span>9 000 F CFA</span></div>
+                <!-- L111: Bouton ajouter au panier -->
+                <a href="#" class="btn">Poulet entier premium issu de notre ferme</a>
+            </div>
+        </div>
+
+        <!-- L112: Carte plat (2) -->
+        <div class="box">
+            <a href="#" class="fas fa-heart"></a>
+            <div class="image">
+                <img src="image/food-2.png" alt="">
+            </div>
+            <div class="content">
+                <h3>Cuisses de poulet</h3>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span> (50) </span>
+                </div>
+                <div class="price">4 500 F CFA <span>7 000 F CFA</span></div>
+                <a href="#" class="btn">Cuisses tendres et juteuses, élevées avec soin</a>
+            </div>
+        </div>
+
+        <!-- L113: Carte plat (3) -->
+        <div class="box">
+            <a href="#" class="fas fa-heart"></a>
+            <div class="image">
+                <img src="image/food-3.png" alt="">
+            </div>
+            <div class="content">
+                <h3>Ailes de poulet</h3>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span> (50) </span>
+                </div>
+                <div class="price"> 500 F CFA <span> 700 F CFA</span></div>
+                <a href="#" class="btn">Pack découverte de nos pièces les plus savoureuses</a>
+            </div>
+        </div>
+
+        
+        <!-- L118: Carte plat (8) -->
+
+    </div>
+
+</section>
+
+<!-- L119: Commentaire de section - fin Populaire -->
+<!-- popular section ends -->
+
+<!-- L120: Commentaire de section - bannières promotionnelles -->
+<!-- banner section starts  -->
+
+<!-- L121: Section bannières avec une grande rangée et une grille -->
+<section class="banner">
+
+    <!-- L122: Grande bannière (row-banner) -->
+    <div class="row-banner">
+        <div class="content">
+            <span>authenticité </span>
+            <h3>Fraîcheur garantie</h3>
+            <p>Poulets au naturel</p>
+            <a href="#" class="btn">Élevage responsable</a>
+        </div>
+    </div>
+
+    <!-- L123: Grille de trois bannières -->
+    <div class="grid-banner">
+        <!-- L124: Bannière 1 - offre spéciale -->
+        <div class="grid">
+            <img src="image/banner-1.png" alt="">
+            <div class="content">
+                <span>Poulet Décembre</span>
+                <h3>Excellence</h3>
+                <a href="#" class="btn">Notre ferme</a>
+            </div>
+        </div>
+        <!-- L125: Bannière 2 - offre spéciale centrée -->
+        <div class="grid">
+            <img src="image/banner-2.png" alt="">
+            <div class="content center">
+                <span>Offre spéciale</span>
+                <h3>Jusqu'à 25% de réduction</h3>
+                <a href="#" class="btn">Commander maintenant</a>
+            </div>
+        </div>
+        <!-- L126: Bannière 3 - offre limitée -->
+        <div class="grid">        
+            <img src="image/banner-3.png" alt="">
+            <div class="content">
+                <span>Offre limitée</span>
+                <h3>Poulets ultra-frais</h3>
+                <a href="#" class="btn">Commander maintenant</a>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- L127: Commentaire de section - fin bannières -->
+<!-- banner section ends -->
+
+<!-- L128: Commentaire de section - Menu -->
+<!-- menu section starts  -->
+
+<!-- L129: Section menu listant les meilleurs plats -->
+
+
+<!-- L138: Commentaire de section - fin Menu -->
+<!-- menu section ends -->
+
+<!-- L139: Commentaire de section - Commande -->
+<!-- order section starts  -->
+
+<!-- L140: Section commande avec informations et formulaire -->
+<section class="order" id="order">
+
+    <!-- L141: En-tête de section commande -->
+    <div class="heading">
+        <span>Commander maintenant</span>
+        <h3>Livraison à domicile la plus rapide</h3>
+    </div>
+
+    <!-- L142: Icônes d'information (horaires, téléphone, localisation) -->
+    <div class="icons-container">
+
+        <!-- L143: Horaire d'ouverture -->
+        <div class="icons">
+            <img src="image/icon-1.png" alt="">
+            <h3>7h00 à 22h30</h3>
+        </div>
+
+        <!-- L144: Téléphone de contact -->
+        <div class="icons">
+            <img src="image/icon-2.png" alt="">
+            <h3>+237653134530</h3>
+            <h3>+237658937239</h3>
+        </div>
+
+        <!-- L145: Localisation -->
+        <div class="icons">
+            <img src="image/icon-3.png" alt="">
+            <h3>Cameroun - Yaoundé</h3>
+        </div>
+
+    </div>
+
+    <!-- L146: Formulaire de commande (sans backend) -->
+    <form id="order-form" action="">
+
+        <!-- L147: Ligne de champs - nom et numéro -->
+        <div class="flex">
+            <div class="inputBox">
+                <span>Votre nom</span>
+                <input type="text" placeholder="Nom du client" name="nom" id="nom">
+            </div>
+            <div class="inputBox">
+                <span>Votre numéro</span>
+                <input type="number" placeholder="Numéro du client" name="telephone" id="telephone">
+            </div>
+        </div>
+
+        <!-- L148: Ligne de champs - commande et quantité -->
+        <div class="flex">
+            <div class="inputBox">
+                <span>Votre commande</span>
+                <input type="text" placeholder="Poulet souhaité" name="commande" id="commande">
+            </div>
+            <div class="inputBox">
+                <span>Combien</span>
+                <input type="number" placeholder="Nombre de poulets" name="quantite" id="quantite">
+            </div>
+        </div>
+
+        <!-- L149: Ligne de champs - détails et heure de retrait -->
+        <div class="flex">
+            <div class="inputBox">
+                <span>Vos détails</span>
+                <input type="text" placeholder="Votre message" name="details" id="details">
+            </div>
+            <div class="inputBox">
+                <span>Heure de retrait</span>
+                <input type="datetime-local" name="heure" id="heure">
+            </div>
+        </div>
+
+        <!-- L150: Ligne de champs - adresse et carte -->
+        <div class="flex">
+            <div class="inputBox">
+                <textarea placeholder="Votre adresse" id="adresse" name="adresse" cols="30" rows="10"></textarea>
+            </div>
+            <div class="inputBox">
+                <!-- L151: Carte Google Maps intégrée pour montrer une zone -->
+                <iframe 
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127665.96887889772!2d11.425076!3d3.848032!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x108bcf9a6cd85917%3A0x2bfb4e056261fbf3!2sYaound%C3%A9%2C%20Cameroun!5e0!3m2!1sfr!2sfr!4v1727893624567!5m2!1sfr!2sfr" 
+  width="600" 
+  height="450" 
+  style="border:0;" 
+  allowfullscreen="" 
+  loading="lazy" 
+  referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+            </div>
+        </div>
+
+        <!-- L152: Bouton pour envoyer la commande -->
+        <input type="submit" value="Valider la commande" class="btn">
+
+    </form>
+
+</section>
+
+<!-- L153: Commentaire de section - fin Commande -->
+<!-- order section ends -->
+
+<!-- L154: Commentaire de section - Blogs -->
+<!-- blogs section starts  -->
+
+<!-- L155: Section blog listant trois articles -->
+<section class="blogs" id="blogs">
+
+    <!-- L156: En-tête de section -->
+    <div class="heading">
+        <span>Nos blogs</span>
+        <h3>Nos histoires quotidiennes</h3>
+    </div>
+
+    <!-- L157: Grille de cartes blog -->
+    <div class="box-container">
+
+        <!-- L158: Carte blog (1) -->
+        <div class="box">
+            <div class="image">z
+                <!-- L159: Date de publication -->
+                <h3> <i class="fas fa-calendar"></i> 29 octobre 2025 </h3>
+                <img src="image/blog-1.jpg" alt="">
+            </div>
+            <div class="content">
+                <!-- L160: Tags de l'article -->
+                <div class="tags">
+                    <a href="#"> <i class="fas fa-tag"></i> Nutrition / </a>
+                    <a href="#"> <i class="fas fa-tag"></i> Recette / </a>
+                    <a href="#"> <i class="fas fa-tag"></i> Bien-etre  </a>
+                </div>
+                <!-- L161: Titre d'article -->
+                <h3>Les Bienfaits du Poulet de Chair sur la Santé</h3>
+                <!-- L162: Extrait -->
+                <p> Découvrez pourquoi nos poulets premium sont une source de protéines nobles et saines pour toute la famille.</p>
+                <!-- L163: Lien pour lire la suite -->
+                <a href="#" id="read-more-1" class="btn">Lire la suite</a>
+            </div>
+        </div>
+
+        <!-- L164: Carte blog (2) -->
+        <div class="box">
+            <div class="image">
+                <h3> <i class="fas fa-calendar"></i> 29 octobre 2025 </h3>
+                <img src="image/blog-2.jpg" alt="">
+            </div>
+            <div class="content">
+                <div class="tags">
+                     <a href="#"> <i class="fas fa-tag"></i> Nutrition / </a>
+                    <a href="#"> <i class="fas fa-tag"></i> Recette / </a>
+                    <a href="#"> <i class="fas fa-tag"></i> Bien-etre  </a>
+                </div>
+                <h3>Recettes simples avec nos poulets frais</h3>
+                <p>Découvrez comment transformer nos poulets d’exception en plats gourmands et raffinés.</p>
+                <a href="#" id="read-more-2" class="btn">Lire la suite</a>
+            </div>
+        </div>
+
+        <!-- L165: Carte blog (3) -->
+        <div class="box">
+            <div class="image">
+                <h3> <i class="fas fa-calendar"></i> 29 octobre 2025 </h3>
+                <img src="image/blog-3.jpg" alt="">
+            </div>
+            <div class="content">
+                <div class="tags">
+                     <a href="#"> <i class="fas fa-tag"></i> Nutrition / </a>
+                    <a href="#"> <i class="fas fa-tag"></i> Recette / </a>
+                    <a href="#"> <i class="fas fa-tag"></i> Bien-etre  </a>
+                </div>
+                <h3>L'élevage éco-responsable chez Poulet Décembre</h3>
+                <p>Inspirez-vous de nos pratiques durables pour apprécier la vraie qualité artisanale.</p>
+                <a href="#" id="read-more-3" class="btn">Lire la suite</a>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- L166: Commentaire de section - fin Blogs -->
+<!-- blogs section ends -->
+
+<!-- L167: Commentaire de section - Pied de page -->
+<!-- footer section starts  -->
+
+<!-- L168: Section pied de page avec newsletter, liens et réseaux -->
+<section class="footer">
+
+    <!-- L169: Bloc newsletter d'inscription par email -->
+    <div class="newsletter">
+        <h3>Newsletter</h3>
+        <form id="newsletter-form" action="">
+            <input type="email" id="newsletter-email" name="" placeholder="Entrez votre email" id="">
+            <input type="submit" value="S'inscrire">
+        </form>
+    </div>
+
+    <!-- L170: Grille de quatre colonnes de liens -->
+    <div class="box-container">
+
+        <!-- L171: Colonne - Notre menu -->
+        <div class="box">
+            <h3>Nos produits</h3>
+            <a href="#"><i class="fas fa-arrow-right"></i> poulet entier</a>
+            <a href="#"><i class="fas fa-arrow-right"></i> cuisses de poulet</a>
+            <a href="#"><i class="fas fa-arrow-right"></i> ailes de poulet</a>
+            <a href="#"><i class="fas fa-arrow-right"></i> poulet découpé</a>
+            <a href="#"><i class="fas fa-arrow-right"></i> brochettes et plus...</a>
+        </div>
+
+        <!-- L172: Colonne - Liens rapides -->
+        <div class="box">
+            <h3>Liens rapides</h3>
+            <a href="#home"> <i class="fas fa-arrow-right"></i> Accueil</a>
+            <a href="#about"> <i class="fas fa-arrow-right"></i> À propos</a>
+            <a href="#popular"> <i class="fas fa-arrow-right"></i> Produits</a>
+            <a href="#menu"> <i class="fas fa-arrow-right"></i> Menu</a>
+            <a href="#order"> <i class="fas fa-arrow-right"></i> Commande</a>
+            <a href="#blogs"> <i class="fas fa-arrow-right"></i> Blogs</a>
+        </div>
+
+        <!-- L173: Colonne - Liens supplémentaires -->
+        <div class="box">
+            <h3>Liens supplémentaires</h3>
+            <a href="#"> <i class="fas fa-arrow-right"></i> Mes commandes</a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> Mon compte</a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> Mes favoris</a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> Conditions d'utilisation</a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> Politique de confidentialité</a>
+        </div>
+
+        <!-- L174: Colonne - Horaires d'ouverture -->
+        <div class="box">
+            <h3>Heures d'ouverture</h3>
+            <p>lundi : 7h00 à 22h00</p>
+            <p>mardi : 7h00 à 22h00</p>
+            <p>mercredi : 7h00 à 22h00</p>
+            <p>vendredi : 7h00 à 22h00</p>
+            <p>samedi : 7h00 à 22h00</p>
+            <p>dimanche : fermé</p>
+        </div>
+
+    </div>
+
+    <!-- L175: Bandeau du bas avec réseaux sociaux et crédits -->
+    <div class="bottom">
+
+        <!-- L176: Liens vers réseaux sociaux (icônes) -->
+        <div class="share">
+            <a href="https://www.facebook.com/profile.php?id=61581641822683" class="fab fa-facebook-f"></a>
+            <a href="https://wa.me/237651578490" class="fab fa-twitter"></a>
+            <a href="https://www.instagram.com/menoalarissa?igsh=MTUxNW00dmM3b3E5bA%3D%3D&utm_source=qr" class="fab fa-instagram"></a>
+            <a href="https://www.linkedin.com/in/larissa-menoa-113846338?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" class="fab fa-linkedin"></a>
+            <a href="https://wa.me/237653134530" class="fab fa-pinterest"></a>
+        </div>
+
+        <!-- L177: Crédit du site -->
+        <div class="credit"> créé par <span>NEXA SERVICE</span> | tous droits réservés ! </div>
+        
+    </div>
+
+</section>
+
+<!-- L178: Commentaire de section - fin Pied de page -->
+<!-- footer section ends -->
+
+<!-- L179: Espaces vides préservés pour correspondre à la structure d'origine -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- L180: Lien vers le fichier JavaScript personnalisé du projet -->
+<script src="js/script.js"></script>
+
+<!-- L181: Fin du corps du document -->
+</body>
+
+<!-- Bouton WhatsApp flottant -->
+<a href="https://wa.me/237653134530" 
+   class="whatsapp-float" 
+   target="_blank" 
+   title="Discuter avec nous sur WhatsApp">
+   <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" 
+        alt="WhatsApp" />
+</a>
+
+<style>
+/* Style du bouton flottant */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 20px;
+    right: 20px;
+    background-color: #FF4500;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pulse-whatsapp 2s infinite;
+}
+
+.whatsapp-float img {
+    width: 35px;
+    height: 35px;
+}
+
+/* Thème couleurs Poulet Décembre : orange chaleureux & or ferme premium */
+:root {
+    --primary: #FF4500;
+    --accent: #FFD700;
+}
+
+.logo {
+    animation: drumstick-pulse 2.5s ease-in-out infinite;
+    color: var(--accent);
+}
+
+.home-img {
+    animation: chicken-float 4s ease-in-out infinite;
+}
+
+.btn {
+    background: linear-gradient(to right, var(--primary), var(--accent));
+    color: #fff;
+    animation: shine-btn 1.8s linear infinite;
+    transition: all 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.08) rotate(2deg);
+    box-shadow: 0 0 25px var(--accent);
+}
+
+/* Keyframes Poulet Décembre - mouvement de poulet frais & appétissant */
+@keyframes drumstick-pulse {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.08) rotate(8deg); }
+}
+
+@keyframes chicken-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-25px) rotate(3deg); }
+}
+
+@keyframes shine-btn {
+    0%, 100% { background-position: 200% center; }
+    50% { background-position: -200% center; }
+}
+
+@keyframes pulse-whatsapp {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+}
+</style>
+
+<!-- Script pour envoyer automatiquement la commande sur WhatsApp + Newsletter + Blogs -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // === FORMULAIRE COMMANDE (déjà présent) ===
+    const orderForm = document.getElementById('order-form');
+    if (orderForm) {
+        orderForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nom = document.getElementById('nom').value || 'Non renseigné';
+            const telephone = document.getElementById('telephone').value || 'Non renseigné';
+            const commande = document.getElementById('commande').value || 'Non renseigné';
+            const quantite = document.getElementById('quantite').value || 'Non renseigné';
+            const details = document.getElementById('details').value || 'Aucun détail';
+            const adresse = document.getElementById('adresse').value || 'Non renseigné';
+            const heure = document.getElementById('heure').value || 'Non renseigné';
+
+            const messageWhatsApp = `🚨 *NOUVELLE COMMANDE* - Poulet Décembre !\n\n` +
+                `*Nom du client :* ${nom}\n` +
+                `*Téléphone :* ${telephone}\n` +
+                `*Commande :* ${commande}\n` +
+                `*Quantité :* ${quantite}\n` +
+                `*Détails :* ${details}\n` +
+                `*Adresse :* ${adresse}\n` +
+                `*Heure de retrait :* ${heure}\n\n` +
+                `Commande enregistrée et envoyée depuis le site web ! Merci de traiter rapidement.`;
+
+            const whatsappUrl = `https://wa.me/237653134530?text=${encodeURIComponent(messageWhatsApp)}`;
+            window.open(whatsappUrl, '_blank');
+            alert('✅ Commande enregistrée avec succès !\nToutes les informations ont été envoyées directement sur WhatsApp.\nMerci pour votre confiance !');
+            orderForm.reset();
+        });
+    }
+
+    // === NEWSLETTER : envoi sur WhatsApp ===
+    const newsletterForm = document.getElementById('newsletter-form');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletter-email').value || 'Non renseigné';
+
+            const messageWhatsApp = `📧 *NOUVELLE INSCRIPTION NEWSLETTER* - Poulet Décembre !\n\n` +
+                `*Email :* ${email}\n\n` +
+                `Inscription reçue depuis le site web. Merci de l'ajouter à la liste !`;
+
+            const whatsappUrl = `https://wa.me/237653134530?text=${encodeURIComponent(messageWhatsApp)}`;
+            window.open(whatsappUrl, '_blank');
+            alert('✅ Inscription à la newsletter réussie !\nVotre email a été envoyé sur WhatsApp.\nMerci pour votre intérêt !');
+            newsletterForm.reset();
+        });
+    }
+
+    // === BLOGS : "Lire la suite" affiche le contenu complet ===
+    const readMore1 = document.getElementById('read-more-1');
+    const readMore2 = document.getElementById('read-more-2');
+    const readMore3 = document.getElementById('read-more-3');
+
+    if (readMore1) {
+        readMore1.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('📖 ARTICLE COMPLET :\n\nLes Bienfaits du Poulet de Chair sur la Santé\n\nNos poulets premium sont une excellente source de protéines nobles, riches en vitamines B6 et B12, et pauvres en graisses saturées. Ils contribuent à la construction musculaire, au renforcement du système immunitaire et à une meilleure santé osseuse. Élevés sans antibiotiques, ils sont idéaux pour toute la famille. Découvrez nos recettes santé sur notre blog !');
+        });
+    }
+
+    if (readMore2) {
+        readMore2.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('📖 ARTICLE COMPLET :\n\nRecettes simples avec nos poulets frais\n\nTransformez nos poulets d’exception en plats gourmands : poulet rôti aux herbes, brochettes marinées au citron, ou cuisses grillées à la sauce arachide. Chaque recette met en valeur la tendreté et la saveur unique de notre élevage artisanal. Téléchargez nos fiches recettes gratuites !');
+        });
+    }
+
+    if (readMore3) {
+        readMore3.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('📖 ARTICLE COMPLET :\n\nL\'élevage éco-responsable chez Poulet Décembre\n\nNous utilisons des méthodes durables : alimentation naturelle, espace en plein air, et rotation des pâturages. Chaque poulet bénéficie d’un bien-être optimal, ce qui se traduit par une viande plus savoureuse et une empreinte carbone réduite. Rejoignez notre démarche éco-responsable !');
+        });
+    }
+});
+</script>
+<!-- L182: Fin du document HTML -->
+</html>
+```
