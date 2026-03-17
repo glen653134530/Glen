@@ -89,6 +89,16 @@
 <!-- shopping-cart section  -->
 
 <!-- L34: Conteneur principal du panier d'achat -->
+<div class="shopping-cart">
+    <div class="cart">
+        <span id="close-cart" class="fas fa-times"></span>
+        <h3>Votre Panier <span id="cart-count">(0 articles)</span></h3>
+        <div id="cart-items"></div>
+        <div class="total">Total : <span id="cart-total">0 F CFA</span></div>
+        <input type="button" id="send-cart-btn" value="Envoyer par WhatsApp" class="btn">
+        <input type="button" id="clear-cart-btn" value="Vider le panier" class="btn">
+    </div>
+</div>
 
 <!-- L58: Commentaire de section - formulaire de connexion -->
 <!-- login-form  -->
@@ -101,9 +111,9 @@
         <!-- L61: Titre du formulaire -->
         <h3>Formulaire de connexion</h3>
         <!-- L62: Champ email avec placeholder en français -->
-        <input type="email" name="" placeholder="Entrez votre email" id="" class="box">
+        <input type="email" name="" placeholder="Entrez votre email" id="login-email" class="box">
         <!-- L63: Champ mot de passe avec placeholder en français -->
-        <input type="password" name="" placeholder="Entrez votre mot de passe" id="" class="box">
+        <input type="password" name="" placeholder="Entrez votre mot de passe" id="login-password" class="box">
         <!-- L64: Case à cocher 'se souvenir de moi' -->
         <div class="remember">
             <input type="checkbox" name="" id="remember-me">
@@ -307,7 +317,7 @@
             <a href="#" class="fas fa-heart"></a>
             <!-- L107: Conteneur image du plat -->
             <div class="image">
-                <img src="image/food-1.png" alt="">
+                <img src="image/food-1.png" alt="" class="clickable-img">
             </div>
             <!-- L108: Contenu textuel du plat -->
             <div class="content">
@@ -332,7 +342,7 @@
         <div class="box">
             <a href="#" class="fas fa-heart"></a>
             <div class="image">
-                <img src="image/food-2.png" alt="">
+                <img src="image/food-2.png" alt="" class="clickable-img">
             </div>
             <div class="content">
                 <h3>Cuisses de poulet</h3>
@@ -353,7 +363,7 @@
         <div class="box">
             <a href="#" class="fas fa-heart"></a>
             <div class="image">
-                <img src="image/food-3.png" alt="">
+                <img src="image/food-3.png" alt="" class="clickable-img">
             </div>
             <div class="content">
                 <h3>Ailes de poulet</h3>
@@ -453,6 +463,13 @@
         <h3>Livraison à domicile la plus rapide</h3>
     </div>
 
+    <!-- Prévisualisation rectangle du produit cliqué (ajouté ici) -->
+    <div id="order-preview" style="border:3px solid #FF4500; border-radius:12px; padding:15px; margin:20px 0; text-align:center; background:#fff9f0;">
+        <p style="margin:0 0 10px; font-weight:bold;">Produit sélectionné :</p>
+        <img id="preview-img" src="" alt="" style="max-width:100%; height:180px; object-fit:cover; border-radius:8px; display:none;">
+        <h4 id="preview-name" style="margin:8px 0 0; color:#FF4500;"></h4>
+    </div>
+
     <!-- L142: Icônes d'information (horaires, téléphone, localisation) -->
     <div class="icons-container">
 
@@ -524,7 +541,7 @@
             <div class="inputBox">
                 <!-- L151: Carte Google Maps intégrée pour montrer une zone -->
                 <iframe 
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127665.96887889772!2d11.425076!3d3.848032!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x108bcf9a6cd85917%3A0x2bfb4e056261fbf3!2sYaound%C3%A9%2C%20Cameroun!5e0!3m2!1sfr!2sfr!4v1727893624567!5m2!1sfr!2sfr" 
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127665.96887889772!2d11.425076!3d3.848032!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x108bcf9a6cd85917%3A0x2bfb4e056261fbf3!2sYaound%C3%A9%2C%20Cameroun!5e0!3m2!1fr!2sfr!4v1727893624567!5m2!1fr!2sfr" 
   width="600" 
   height="450" 
   style="border:0;" 
@@ -626,6 +643,74 @@
 <!-- L166: Commentaire de section - fin Blogs -->
 <!-- blogs section ends -->
 
+<!-- SECTION TÉMOIGNAGES AJOUTÉE (amélioration demandée) -->
+<section class="testimonials" id="testimonials">
+    <div class="heading">
+        <span>Ce que disent nos clients</span>
+        <h3>Témoignages authentiques</h3>
+    </div>
+    <div class="box-container">
+        <!-- Témoignage 1 -->
+        <div class="box">
+            <div class="image">
+                <img src="image/test-1.png" alt="">
+            </div>
+            <div class="content">
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p>"Le meilleur poulet que j'ai mangé à Yaoundé ! Frais, tendre, et la livraison est ultra-rapide. Je recommande à 100% !"</p>
+                <h3>— Marie K., Yaoundé</h3>
+            </div>
+        </div>
+        <!-- Témoignage 2 -->
+        <div class="box">
+            <div class="image">
+                <img src="image/test-2.png" alt="">
+            </div>
+            <div class="content">
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+                <p>"Les cuisses sont juteuses à souhait. Mon mari et mes enfants adorent. Service client au top !"</p>
+                <h3>— Jean P., Douala</h3>
+            </div>
+        </div>
+        <!-- Témoignage 3 -->
+        <div class="box">
+            <div class="image">
+                <img src="image/test-3.png" alt="">
+            </div>
+            <div class="content">
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p>"Poulet fumé exceptionnel ! Goût authentique, emballage parfait. Je suis fidèle depuis 6 mois."</p>
+                <h3>— Aïcha M., Bafoussam</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulaire pour ajouter son propre commentaire + étoiles -->
+    <div style="margin-top:30px; padding:20px; background:#fff9f0; border:2px solid #FF4500; border-radius:12px; text-align:center;">
+        <h4>Ajoutez votre témoignage</h4>
+        <input type="text" id="testimonial-name" placeholder="Votre nom (obligatoire)" style="width:90%; padding:8px; margin:10px 0;">
+        <textarea id="new-comment" placeholder="Votre commentaire ici..." style="width:90%; height:80px; margin:10px 0;"></textarea>
+        <div style="margin:10px 0;">
+            <span>Notez avec des étoiles : </span>
+            <select id="new-stars" style="padding:8px; font-size:16px;">
+                <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+                <option value="4">⭐⭐⭐⭐ (4)</option>
+                <option value="3">⭐⭐⭐ (3)</option>
+                <option value="2">⭐⭐ (2)</option>
+                <option value="1">⭐ (1)</option>
+            </select>
+        </div>
+        <button onclick="submitNewTestimonial()" class="btn">Valider mon témoignage</button>
+    </div>
+</section>
+<!-- fin section témoignages -->
+
 <!-- L167: Commentaire de section - Pied de page -->
 <!-- footer section starts  -->
 
@@ -668,11 +753,11 @@
         <!-- L173: Colonne - Liens supplémentaires -->
         <div class="box">
             <h3>Liens supplémentaires</h3>
-            <a href="#"> <i class="fas fa-arrow-right"></i> Mes commandes</a>
-            <a href="#"> <i class="fas fa-arrow-right"></i> Mon compte</a>
-            <a href="#"> <i class="fas fa-arrow-right"></i> Mes favoris</a>
-            <a href="#"> <i class="fas fa-arrow-right"></i> Conditions d'utilisation</a>
-            <a href="#"> <i class="fas fa-arrow-right"></i> Politique de confidentialité</a>
+            <a href="#" onclick="showLinkInfo('Mes commandes')"> <i class="fas fa-arrow-right"></i> Mes commandes</a>
+            <a href="#" onclick="showLinkInfo('Mon compte')"> <i class="fas fa-arrow-right"></i> Mon compte</a>
+            <a href="#" onclick="showLinkInfo('Mes favoris')"> <i class="fas fa-arrow-right"></i> Mes favoris</a>
+            <a href="#" onclick="showLinkInfo('Conditions d\'utilisation')"> <i class="fas fa-arrow-right"></i> Conditions d'utilisation</a>
+            <a href="#" onclick="showLinkInfo('Politique de confidentialité')"> <i class="fas fa-arrow-right"></i> Politique de confidentialité</a>
         </div>
 
         <!-- L174: Colonne - Horaires d'ouverture -->
@@ -814,6 +899,81 @@
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.12); }
 }
+
+/* Panier avancé - styles intégrés (amélioré) */
+.shopping-cart {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 380px;
+    height: 100%;
+    background: #fff;
+    z-index: 2000;
+    box-shadow: -5px 0 15px rgba(0,0,0,.3);
+    transition: right .4s;
+    padding: 20px;
+    overflow-y: auto;
+}
+.shopping-cart.active {
+    right: 0;
+}
+#cart-items .cart-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    margin: 8px 0;
+}
+#cart-items .cart-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid var(--accent);
+}
+#cart-items .cart-item span {
+    flex: 1;
+}
+#cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #FF4500;
+    color: white;
+    border-radius: 50%;
+    font-size: 12px;
+    padding: 2px 7px;
+    z-index: 10;
+    display: none;
+}
+
+/* Section témoignages (styles intégrés) */
+.testimonials .box {
+    text-align: center;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 15px;
+}
+.testimonials .box img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+.testimonials .stars {
+    color: #FFD700;
+    margin-bottom: 10px;
+}
+
+/* Images cliquables dans Spécialités */
+.popular .image img.clickable-img {
+    cursor: pointer;
+    transition: transform .3s;
+}
+.popular .image img.clickable-img:hover {
+    transform: scale(1.08);
+}
 </style>
 
 <!-- Script pour envoyer automatiquement la commande sur WhatsApp + Newsletter + Blogs -->
@@ -892,6 +1052,343 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('📖 ARTICLE COMPLET :\n\nL\'élevage éco-responsable chez Poulet Décembre\n\nNous utilisons des méthodes durables : alimentation naturelle, espace en plein air, et rotation des pâturages. Chaque poulet bénéficie d’un bien-être optimal, ce qui se traduit par une viande plus savoureuse et une empreinte carbone réduite. Rejoignez notre démarche éco-responsable !');
         });
     }
+
+    // === OPTION RECHERCHE FONCTIONNELLE ===
+    const searchBox = document.getElementById('search-box');
+    if (searchBox) {
+        searchBox.addEventListener('input', () => {
+            const query = searchBox.value.toLowerCase().trim();
+            const productBoxes = document.querySelectorAll('.box-container .box, .popular .box, .menu .box');
+            productBoxes.forEach(box => {
+                const text = box.textContent.toLowerCase();
+                box.style.display = text.includes(query) ? 'block' : 'none';
+            });
+        });
+    }
+
+    // === CONNEXION FONCTIONNELLE + CRÉATION COMPTE + FENÊTRE ACTIONNAIRE ===
+    const loginFormContainer = document.querySelector('.login-form-container');
+    const loginForm = loginFormContainer ? loginFormContainer.querySelector('form') : null;
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value.trim();
+            if (!email || !password) {
+                alert('Veuillez remplir email et mot de passe.');
+                return;
+            }
+            alert('✅ Connexion réussie ! Bienvenue.');
+            const shareholderHTML = `
+                <form id="shareholder-form">
+                    <h3>Devenir Actionnaire chez Poulet Décembre</h3>
+                    <p>Remplissez les conditions pour être actionnaire :</p>
+                    <input type="text" id="shareholder-name" placeholder="Nom complet" class="box">
+                    <input type="email" id="shareholder-email" value="${email}" placeholder="Email" class="box">
+                    <input type="tel" id="shareholder-phone" placeholder="Téléphone" class="box">
+                    <input type="number" id="shareholder-investment" placeholder="Montant à investir (F CFA)" class="box">
+                    <div class="remember"><input type="checkbox" id="cond1"><label for="cond1">Je suis majeur et accepte les statuts</label></div>
+                    <div class="remember"><input type="checkbox" id="cond2"><label for="cond2">Je comprends les risques d'investissement</label></div>
+                    <div class="remember"><input type="checkbox" id="cond3"><label for="cond3">Je m'engage à respecter les conditions d'actionnariat</label></div>
+                    <div class="remember"><input type="checkbox" id="cond4"><label for="cond4">J'ai lu et accepte toutes les clauses légales</label></div>
+                    <textarea id="shareholder-details" placeholder="Autres informations" class="box" style="height:80px;"></textarea>
+                    <input type="submit" value="Soumettre pour devenir actionnaire" class="btn">
+                </form>
+            `;
+            loginFormContainer.innerHTML = shareholderHTML;
+            const shareholderForm = document.getElementById('shareholder-form');
+            if (shareholderForm) {
+                shareholderForm.addEventListener('submit', function(ev) {
+                    ev.preventDefault();
+                    const name = document.getElementById('shareholder-name').value || 'Non renseigné';
+                    const sEmail = document.getElementById('shareholder-email').value || 'Non renseigné';
+                    const phone = document.getElementById('shareholder-phone').value || 'Non renseigné';
+                    const investment = document.getElementById('shareholder-investment').value || '0';
+                    const details = document.getElementById('shareholder-details').value || 'Aucun';
+                    const allAccepted = document.getElementById('cond1').checked && document.getElementById('cond2').checked && document.getElementById('cond3').checked && document.getElementById('cond4').checked;
+                    if (!allAccepted) {
+                        alert('Vous devez accepter toutes les conditions pour devenir actionnaire !');
+                        return;
+                    }
+                    const messageWA = `🚀 *DEMANDE DEVENIR ACTIONNAIRE* - Poulet Décembre !\n\n*Nom :* ${name}\n*Email :* ${sEmail}\n*Téléphone :* ${phone}\n*Montant :* ${investment} F CFA\n*Détails :* ${details}\n*Conditions :* Toutes acceptées\n\nDemande envoyée après authentification.`;
+                    const waUrl = `https://wa.me/237653134530?text=${encodeURIComponent(messageWA)}`;
+                    window.open(waUrl, '_blank');
+                    alert('✅ Demande d\'actionnariat envoyée avec succès sur WhatsApp !');
+                    loginFormContainer.style.display = 'none';
+                });
+            }
+        });
+    }
+
+    // === CRÉATION DE COMPTE ===
+    const createLink = document.querySelector('.login-form-container p:last-child a');
+    if (createLink) {
+        createLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('📝 Compte créé avec succès !\nVous pouvez maintenant vous connecter.');
+        });
+    }
+
+    // === NOTER (CHOISIR NOMBRE D'ÉTOILES) ET ENVOYER PAR WHATSAPP ===
+    const popularBoxes = document.querySelectorAll('.popular .box');
+    popularBoxes.forEach(box => {
+        const starsContainer = box.querySelector('.stars');
+        if (!starsContainer) return;
+        const stars = starsContainer.querySelectorAll('i');
+        stars.forEach((star, index) => {
+            star.style.cursor = 'pointer';
+            star.addEventListener('click', () => {
+                const rating = index + 1;
+                stars.forEach((s, i) => {
+                    if (i < rating) {
+                        s.classList.remove('fa-star-half-alt');
+                        s.classList.add('fa-star');
+                        s.style.color = '#FFD700';
+                    } else {
+                        s.style.color = '#ccc';
+                    }
+                });
+                const productName = box.querySelector('h3').innerText.trim();
+                const messageWA = `⭐ *NOUVELLE ÉVALUATION* - Poulet Décembre !\n\n*Produit :* ${productName}\n*Note choisie :* ${rating}/5 étoiles\nÉvaluation envoyée depuis le site.`;
+                const waUrl = `https://wa.me/237653134530?text=${encodeURIComponent(messageWA)}`;
+                window.open(waUrl, '_blank');
+                alert(`✅ Note de ${rating} étoiles pour "${productName}" envoyée par WhatsApp !`);
+            });
+        });
+    });
+
+    // === SYSTÈME PANIER AVANCÉ (AMÉLIORÉ : images produits + badge + sauvegarde auto) ===
+    const shoppingCart = document.querySelector('.shopping-cart');
+    const cartBtn = document.getElementById('cart-btn');
+    const closeCartBtn = document.getElementById('close-cart');
+    if (shoppingCart && cartBtn && closeCartBtn) {
+        cartBtn.addEventListener('click', () => shoppingCart.classList.add('active'));
+        closeCartBtn.addEventListener('click', () => shoppingCart.classList.remove('active'));
+    }
+
+    function renderCart() {
+        const container = document.getElementById('cart-items');
+        const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
+        let html = '';
+        let total = 0;
+        currentCart.forEach((item, i) => {
+            const subt = item.price * item.qty;
+            total += subt;
+            html += `<div class="cart-item">
+                <img src="${item.img || 'image/food-1.png'}" alt="">
+                <span style="flex:1;">${item.name}</span>
+                <span>${item.price} F CFA</span>
+                <span style="display:flex;align-items:center;">
+                    <button onclick="updateQty(${i},-1)" style="width:25px;height:25px;background:var(--primary);color:white;border:none;">-</button>
+                    <span style="margin:0 8px;">${item.qty}</span>
+                    <button onclick="updateQty(${i},1)" style="width:25px;height:25px;background:var(--primary);color:white;border:none;">+</button>
+                </span>
+                <span>${subt} F CFA</span>
+                <button onclick="removeItem(${i})" style="background:red;color:white;border:none;padding:5px 8px;">×</button>
+            </div>`;
+        });
+        container.innerHTML = html || '<p style="text-align:center;color:#666;">Votre panier est vide.<br><small>Les articles sont sauvegardés automatiquement</small></p>';
+        document.getElementById('cart-total').textContent = `${total} F CFA`;
+        const countEl = document.getElementById('cart-count');
+        if (countEl) countEl.textContent = `(${currentCart.length} articles)`;
+
+        const badge = document.getElementById('cart-badge');
+        if (badge) {
+            badge.textContent = currentCart.length;
+            badge.style.display = currentCart.length > 0 ? 'inline-block' : 'none';
+        }
+    }
+
+    window.updateQty = function(index, delta) {
+        let currentCart = JSON.parse(localStorage.getItem('cart')) || [];
+        if (currentCart[index]) {
+            currentCart[index].qty += delta;
+            if (currentCart[index].qty < 1) currentCart[index].qty = 1;
+            localStorage.setItem('cart', JSON.stringify(currentCart));
+        }
+        renderCart();
+    };
+
+    window.removeItem = function(index) {
+        let currentCart = JSON.parse(localStorage.getItem('cart')) || [];
+        currentCart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(currentCart));
+        renderCart();
+    };
+
+    function addToCart(name, price, imgSrc) {
+        let currentCart = JSON.parse(localStorage.getItem('cart')) || [];
+        const existing = currentCart.find(item => item.name === name);
+        if (existing) {
+            existing.qty++;
+        } else {
+            currentCart.push({name: name, price: price, qty: 1, img: imgSrc});
+        }
+        localStorage.setItem('cart', JSON.stringify(currentCart));
+        renderCart();
+        if (shoppingCart) shoppingCart.classList.add('active');
+        alert(`✅ ${name} ajouté au panier ! (image sauvegardée)`);
+    }
+
+    // Attacher les boutons d'ajout avec image (amélioration panier)
+    const popularAddBtns = document.querySelectorAll('.popular .box .btn');
+    popularAddBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const box = this.closest('.box');
+            const name = box.querySelector('h3').textContent.trim();
+            let priceText = box.querySelector('.price').textContent.trim();
+            const cleanPrice = priceText.replace(/[^\d]/g, '');
+            const price = cleanPrice ? parseInt(cleanPrice) : 0;
+            const imgSrc = box.querySelector('img').src;
+            addToCart(name, price, imgSrc);
+        });
+    });
+
+    const menuBoxes = document.querySelectorAll('.menu .box');
+    menuBoxes.forEach(box => {
+        box.addEventListener('click', function(e) {
+            e.preventDefault();
+            const name = box.querySelector('h3').textContent.trim();
+            let priceText = box.querySelector('.price').textContent.trim();
+            const cleanPrice = priceText.replace(/[^\d]/g, '');
+            const price = cleanPrice ? parseInt(cleanPrice) : 0;
+            const imgSrc = box.querySelector('img').src;
+            addToCart(name, price, imgSrc);
+        });
+    });
+
+    // Charger et afficher le panier au démarrage
+    renderCart();
+
+    // Envoyer le panier par WhatsApp
+    const sendCartBtn = document.getElementById('send-cart-btn');
+    if (sendCartBtn) {
+        sendCartBtn.addEventListener('click', () => {
+            const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (currentCart.length === 0) {
+                alert('Panier vide !');
+                return;
+            }
+            let message = `🛒 *PANIER AVANCÉ* - Poulet Décembre !\n\n`;
+            let grandTotal = 0;
+            currentCart.forEach(item => {
+                const subt = item.price * item.qty;
+                grandTotal += subt;
+                message += `*${item.name}* ×${item.qty} = ${subt} F CFA\n`;
+            });
+            message += `\n*TOTAL :* ${grandTotal} F CFA\nEnvoyé depuis le site web.`;
+            const waUrl = `https://wa.me/237653134530?text=${encodeURIComponent(message)}`;
+            window.open(waUrl, '_blank');
+            alert('✅ Panier envoyé avec succès sur WhatsApp !');
+        });
+    }
+
+    // Vider le panier
+    const clearBtn = document.getElementById('clear-cart-btn');
+    if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+            if (confirm('Vider complètement le panier ?')) {
+                localStorage.removeItem('cart');
+                renderCart();
+            }
+        });
+    }
+
+    // === FAVORIS (déjà présent) ===
+    popularBoxes.forEach(box => {
+        const heart = box.querySelector('.fas.fa-heart');
+        if (heart) {
+            heart.style.cursor = 'pointer';
+            const name = box.querySelector('h3').textContent.trim();
+            let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            if (favorites.includes(name)) {
+                heart.style.color = 'red';
+            }
+            heart.addEventListener('click', function(e) {
+                e.preventDefault();
+                let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+                const idx = favorites.indexOf(name);
+                if (idx > -1) {
+                    favorites.splice(idx, 1);
+                    heart.style.color = '';
+                    alert(`❌ ${name} retiré des favoris`);
+                } else {
+                    favorites.push(name);
+                    heart.style.color = 'red';
+                    alert(`❤️ ${name} ajouté aux favoris !`);
+                }
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            });
+        }
+    });
+
+    // === CLIC SUR IMAGE → AFFICHE DANS SECTION COMMANDER (rectangle) ===
+    const clickableImages = document.querySelectorAll('.popular .clickable-img');
+    clickableImages.forEach(img => {
+        img.addEventListener('click', function() {
+            const box = this.closest('.box');
+            const productName = box.querySelector('h3').textContent.trim();
+            const productImg = this.src;
+
+            // Affichage dans le rectangle de prévisualisation
+            const previewImg = document.getElementById('preview-img');
+            const previewName = document.getElementById('preview-name');
+            previewImg.src = productImg;
+            previewImg.style.display = 'block';
+            previewName.textContent = productName;
+
+            // Scroll automatique vers la section commande
+            document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+
+            // Pré-remplissage du champ commande
+            document.getElementById('commande').value = productName;
+        });
+    });
+
+    // === LIENS SUPPLÉMENTAIRES : affichage d'information ===
+    window.showLinkInfo = function(text) {
+        let info = '';
+        switch(text) {
+            case 'Mes commandes':
+                info = 'Vous pouvez suivre toutes vos commandes ici. Contactez-nous sur WhatsApp pour le statut.';
+                break;
+            case 'Mon compte':
+                info = 'Connectez-vous pour gérer votre profil, vos adresses et vos préférences.';
+                break;
+            case 'Mes favoris':
+                info = 'Tous les produits que vous avez aimés sont stockés dans vos favoris.';
+                break;
+            case 'Conditions d\'utilisation':
+                info = 'Nos conditions générales de vente et d\'utilisation du site.';
+                break;
+            case 'Politique de confidentialité':
+                info = 'Nous respectons vos données personnelles conformément à la loi camerounaise.';
+                break;
+        }
+        alert(`📋 Information : ${text}\n\n${info}`);
+    };
+
+    // === NOUVEAU TÉMOIGNAGE (client ajoute son commentaire + étoiles) ===
+    window.submitNewTestimonial = function() {
+        const name = document.getElementById('testimonial-name').value.trim() || 'Anonyme';
+        const comment = document.getElementById('new-comment').value.trim();
+        const stars = document.getElementById('new-stars').value;
+        if (!comment) {
+            alert('Veuillez écrire un commentaire !');
+            return;
+        }
+        const messageWA = `📝 *NOUVEAU TÉMOIGNAGE* - Poulet Décembre !\n\n` +
+            `*Nom de l'expéditeur :* ${name}\n` +
+            `*Commentaire :* ${comment}\n` +
+            `*Note :* ${stars} étoiles\n` +
+            `Envoyé depuis le formulaire du site.`;
+        const waUrl = `https://wa.me/237653134530?text=${encodeURIComponent(messageWA)}`;
+        window.open(waUrl, '_blank');
+        alert('✅ Merci ' + name + ' ! Votre témoignage a été envoyé sur WhatsApp et sera publié prochainement.');
+        document.getElementById('new-comment').value = '';
+        document.getElementById('testimonial-name').value = '';
+    };
 });
 </script>
 <!-- L182: Fin du document HTML -->
